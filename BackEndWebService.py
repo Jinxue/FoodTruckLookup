@@ -109,34 +109,3 @@ class FoodTruckLoopup(object):
 #ft = FoodTruckLoopup(37.73, -122.40, 100000)
 #print ft.obtainFoodTruckOnWithCache(37.73, -122.40, 1000)
 #print ft.obtainFoodTruckOnTheFly(37.73, -122.40, 1000)
-
-'''
-def outputTime(id):
-    tmp = time.time()
-    global startTime
-    t, startTime = tmp - startTime, tmp
-    return "%s: using %.3f seconds." % (id, t)
-
-def test_Whole():
-    res = ft.obtainFoodTruckOnWithCache(37.77, -122.38, 2000)
-    #self.assertTrue(res[0] > 0)
-    print res[0], outputTime("1")
-
-    res = ft.obtainFoodTruckOnWithCache(37.78, -122.39, 1000)
-    #self.assertTrue(res[0] > 0)
-    print res[0], outputTime("2")
-
-    res = ft.obtainFoodTruckOnWithCache(37.73, -122.40, 100000)
-    #self.assertTrue(res[0] > 0)
-    print res[0], outputTime("3")
-
-    res = ft.obtainFoodTruckOnWithCache(37.73, -122.40, 100)
-    #self.assertTrue(res[0] == 0)
-    print res[0], outputTime("4")
-
-    res = ft.obtainFoodTruckOnWithCache(137.73, 122.40, 1000)
-    #self.assertTrue(res[0] == 0)
-    print res[0], outputTime("5")
-ft = FoodTruckLoopup(37.73, -122.40, 1000000)
-startTime = time.time()
-test_Whole()'''
