@@ -1,9 +1,9 @@
 # FoodTruckLookup
 The forth problem (Food Trucks) in https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md, which requires to 
 create a service that tells the user what types of food trucks might be found near a specific location on a map.
-
 The data is available on DataSF: Food Trucks: https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat
 
+***************************Implementation************************************
 The project focuses on the back end: the web service class FoodTruckLoopup has two public interfaces:
 1. obtainFoodTruckOnTheFly(self, lat, lon, radius) for the case when we need the real-time data in each invoking, we access the server on the fly.
 2. obtainFoodTruckOnWithCache(self, lat, lon, radius) for the case when the server data is slow to change, we can cache it in local.
@@ -13,6 +13,7 @@ In the back end, the library Pandas is used to process the JSON data.
 
 This project also includes a mini front-end by returning the JSON object format of the result. The front end then can render it on the Google Map.
 
+***************************Testing************************************
 The test.py unit test several cases, and also the comparison for these two methods(CacheTest and OnTheFly) in terms of computation time. The result is as follows:
 86 __main__.CacheTest.test_Whole: using 1.747 seconds.
 44 __main__.CacheTest.test_Whole: using 0.011 seconds.
