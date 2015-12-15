@@ -1,0 +1,36 @@
+# FoodTruckLookup
+The forth problem (Food Trucks) in https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md
+
+Create a service that tells the user what types of food trucks might be found near a specific location on a map.
+
+The data is available on DataSF: Food Trucks: https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat
+
+The project focuses on the back end: the web service class FoodTruckLoopup has two public interfaces:
+
+1. obtainFoodTruckOnTheFly(self, lat, lon, radius) for the case when we need the real-time data in each invoking, we access the server on the fly.
+
+2. obtainFoodTruckOnWithCache(self, lat, lon, radius) for the case when the server data is slow to change, we can cache it in local.
+
+For the dataset in https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md, there are only 733 records, hence the second method should be more efficient than the first one if multiple calls happened.
+
+The test.py unit test several cases, and also the comparison for these two methods in terms of computation time. The result is as follows:
+86 __main__.CacheTest.test_Whole: using 1.747 seconds.
+44 __main__.CacheTest.test_Whole: using 0.011 seconds.
+437 __main__.CacheTest.test_Whole: using 0.006 seconds.
+0 __main__.CacheTest.test_Whole: using 0.003 seconds.
+0 __main__.CacheTest.test_Whole: using 1.180 seconds.
+.81
+__main__.OnTheFlyTest.test_BasicFTTestCase: using 0.417 seconds.
+.41
+__main__.OnTheFlyTest.test_BasicFTTestCase2: using 0.321 seconds.
+..437
+__main__.OnTheFlyTest.test_LargerRadius: using 1.247 seconds.
+0
+__main__.OnTheFlyTest.test_OutRange: using 0.233 seconds.
+.0
+__main__.OnTheFlyTest.test_SmallerRadius: using 0.219 seconds.
+.
+----------------------------------------------------------------------
+Ran 6 tests in 5.384s
+
+OK
