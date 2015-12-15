@@ -8,7 +8,6 @@ The data is available on DataSF: Food Trucks: https://data.sfgov.org/Economy-and
 The project focuses on the back end: the web service class FoodTruckLoopup has two public interfaces:
 
 1. obtainFoodTruckOnTheFly(self, lat, lon, radius) for the case when we need the real-time data in each invoking, we access the server on the fly.
-
 2. obtainFoodTruckOnWithCache(self, lat, lon, radius) for the case when the server data is slow to change, we can cache it in local.
 
 For the dataset in https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md, there are only 733 records, hence the second method should be more efficient than the first one if multiple calls happened.
