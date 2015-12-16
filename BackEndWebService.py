@@ -37,12 +37,11 @@ class FoodTruckLoopup(object):
         We can also filter out the records expired. 
         Unfortunately, the web service seems not support the SoQL for between...and...'''
         
-        query = (SERVERURL + "?" +
+        query = SERVERURL + "?" +
             "$$app_token=" + APPTOKEN +
             "&facilitytype=Truck" +
             "&status=APPROVED" +
             "&$where=within_circle(location%2C%20" + str(lat) + "%2C%20" + str(lon) + "%2C%20" + str(radius) + ")"
-            )
         try:
             raw_data = pd.read_json(query, typ = "series")
             
@@ -85,11 +84,11 @@ class FoodTruckLoopup(object):
         
         inCircle = self.within_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius)
         if self.start or (time.time() - self.lasttime) > self.expirationDays * 24 * 3600 or not inCircle:
-            query = (SERVERURL + "?" + "$$app_token=" + APPTOKEN +
+            query = SERVERURL + "?" + "$$app_token=" + APPTOKEN +
                      "&facilitytype=Truck" +
                      "&status=APPROVED" +
                      "&$where=within_circle(location%2C%20" + 
-                        str(self.centerLat) + "%2C%20" + str(self.centerLon) + "%2C%20" + str(self.maxRadius) + ")")
+                        str(self.centerLat) + "%2C%20" + str(self.centerLon) + "%2C%20" + str(self.maxRadius) + ")"
             try:
                 self.json = pd.read_json(query, typ = "series")
             except  urllib2.HTTPError, e:
