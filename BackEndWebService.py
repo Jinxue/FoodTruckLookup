@@ -47,7 +47,6 @@ class FoodTruckLoopup(object):
             
             # Then output the useful information
             res = [(x["location"], x["address"], x["applicant"], x["fooditems"]) for x in raw_data]
-            #print res
             new_data = pd.DataFrame(res)
             return len(res), new_data.to_json()
         except  urllib2.HTTPError, e:
