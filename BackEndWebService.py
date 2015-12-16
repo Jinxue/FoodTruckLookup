@@ -55,7 +55,7 @@ class FoodTruckLoopup(object):
             print e.read()
             return "ERROR"
 
-    def winin_circle(self, lat1, lon1, lat2, lon2, r):
+    def within_circle(self, lat1, lon1, lat2, lon2, r):
         '''
         Calculate the great circle distance between two points 
         on the earth (specified in decimal degrees), and check whether they are within r
@@ -83,7 +83,7 @@ class FoodTruckLoopup(object):
         
         '''
         if self.start or ((time.time() - self.lasttime) > self.expirationDays * 24 * 3600) or \
-        (self.winin_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius) == False):
+        (self.within_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius) == False):
             query = (SERVERURL + "?" + "$$app_token=" + APPTOKEN +
                      "&facilitytype=Truck" +
                      "&status=APPROVED" +
@@ -96,12 +96,12 @@ class FoodTruckLoopup(object):
                 return "ERROR"
             self.start, self.lasttime = False, time.time()
         
-        if not self.winin_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius):
+        if not self.within_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius):
             self.centerLat, self.centerLon, self.maxRadius = lat, lon, radius 
             
         # Then output the useful information
         res = [(x["location"], x["address"], x["applicant"], x["fooditems"]) for x in self.json \
-                    if self.winin_circle(lat, lon, float(x["latitude"]), float(x["longitude"]), radius)]
+                    if self.within_circle(lat, lon, float(x["latitude"]), float(x["longitude"]), radius)]
 
         new_data = pd.DataFrame(res)
         return len(res), new_data.to_json()
