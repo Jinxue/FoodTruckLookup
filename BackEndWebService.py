@@ -82,8 +82,9 @@ class FoodTruckLoopup(object):
         2. The current query radius in out of the (self.centerLat, self.centerLon, self.maxRadius)
         
         '''
-        if self.start or ((time.time() - self.lasttime) > self.expirationDays * 24 * 3600) or \
-        (self.within_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius) == False):
+        
+        inCircle = self.within_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius)
+        if self.start or (time.time() - self.lasttime) > self.expirationDays * 24 * 3600 or not inCircle:
             query = (SERVERURL + "?" + "$$app_token=" + APPTOKEN +
                      "&facilitytype=Truck" +
                      "&status=APPROVED" +
@@ -96,7 +97,7 @@ class FoodTruckLoopup(object):
                 return "ERROR"
             self.start, self.lasttime = False, time.time()
         
-        if not self.within_circle(self.centerLat, self.centerLon, lat, lon, self.maxRadius):
+        if not inCircle:
             self.centerLat, self.centerLon, self.maxRadius = lat, lon, radius 
             
         # Then output the useful information
